@@ -8,6 +8,8 @@ import javax.crypto.SecretKey;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.karadag.galeri.entity.User;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -23,7 +25,7 @@ public class AccessTokenService {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(UserDetails user) {
+    public String generateToken(User user) {
         return Jwts.builder()
                 .subject(user.getUsername())
                 .issuedAt(new Date())

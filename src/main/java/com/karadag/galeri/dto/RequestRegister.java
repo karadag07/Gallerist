@@ -1,0 +1,16 @@
+package com.karadag.galeri.dto;
+
+import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
+
+@Data
+public class RequestRegister {
+    @NotEmpty
+    private String username;
+
+    @NotEmpty
+    private String email;
+
+    @NotEmpty
+    private String password;
+}

@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.karadag.galeri.service.AccessTokenService;
+import com.karadag.galeri.service.AccessTokenServiceImpl;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final AccessTokenService accessTokenService;
+    private final AccessTokenServiceImpl accessTokenService;
     private final UserDetailsService userDetailsService;
 
     @Override

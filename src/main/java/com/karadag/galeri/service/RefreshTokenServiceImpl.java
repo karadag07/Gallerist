@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class RefreshTokenServiceImpl implements IRefreshTokenService {
-    private final AccessTokenService accessTokenService;
+    private final AccessTokenServiceImpl accessTokenService;
     private final RefreshTokenRepository refreshTokenRepository;
 
     public ResponseToken generateAccessTokenFromRefreshToken(RefreshToken sendedRefreshToken) {

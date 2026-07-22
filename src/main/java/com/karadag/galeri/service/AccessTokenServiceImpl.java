@@ -16,7 +16,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 @Service
-public class AccessTokenService {
+public class AccessTokenServiceImpl {
 
     private final static String SECRET_KEY = "6yAw9UJ1ZGIE3ivXxkQ1xnb9BauSkvcdSJ447DQE";
 

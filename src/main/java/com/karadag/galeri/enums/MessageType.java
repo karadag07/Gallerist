@@ -18,7 +18,8 @@ public enum MessageType {// Projede olabilecek tüm hata türlerinin, kod + mesa
     CURRENY_RATES_IS_OCCURED("1010", "döviz kuru alınamadı"),
     CUSTOMER_AMOUNT_IS_NOT_ENOUGH("1011", "müşterinin parası yeterli değildir"), // musterının bakıyesı yeterlı olmalı
     CAR_STATUS_IS_ALREADY_SALED("1012", "araba satılmış göründüğü için satılamaz"), // arabanın satılmamıs olması lazım
-    GENERAL_EXCEPTION("9999", "genel bir hata oluştu");
+    GENERAL_EXCEPTION("9999", "genel bir hata oluştu"),
+    USERNAME_ALREADY_EXISTS("1013", "username kullanılmaktadır"),;
 
     private String code;
     private String message;

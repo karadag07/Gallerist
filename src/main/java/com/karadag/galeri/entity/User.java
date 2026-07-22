@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.karadag.galeri.enums.RoleType;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,7 +25,11 @@ public class User extends BaseEntity implements UserDetails {
 
 	private String username;
 
+	private String email;
+
 	private String password;
+
+	private RoleType role;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

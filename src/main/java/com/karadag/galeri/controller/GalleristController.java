@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.karadag.galeri.controller.IController.IGalleristController;
+import com.karadag.galeri.dto.OkResponse;
 import com.karadag.galeri.dto.RequestGallerist;
 import com.karadag.galeri.dto.ResponseGallerist;
 import com.karadag.galeri.service.IService.IGalleristService;
@@ -20,7 +21,7 @@ public class GalleristController implements IGalleristController {
 
     @PostMapping("/gallerist")
     @Override
-    public ResponseGallerist saveGallerist(@RequestBody @Valid RequestGallerist gallerist) {
-        return galleristService.saveGallerist(gallerist);
+    public OkResponse<ResponseGallerist> saveGallerist(@RequestBody @Valid RequestGallerist gallerist) {
+        return OkResponse.ok(galleristService.saveGallerist(gallerist));
     }
 }

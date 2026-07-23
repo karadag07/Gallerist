@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.karadag.galeri.entity.User;
+import com.karadag.galeri.service.IService.IAccessTokenService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -16,16 +17,16 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 @Service
-public class AccessTokenServiceImpl {
+public class AccessTokenServiceImpl implements IAccessTokenService {
 
     private final static String SECRET_KEY = "6yAw9UJ1ZGIE3ivXxkQ1xnb9BauSkvcdSJ447DQE";
 
-    private SecretKey getKey() {
+    public SecretKey getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(User user) {
+    public String generateAccessToken(User user) {
         return Jwts.builder()
                 .subject(user.getUsername())
                 .issuedAt(new Date())
@@ -60,4 +61,5 @@ public class AccessTokenServiceImpl {
         String username = user.getUsername();
         return username.equals(getUsername(token)) && !isTokenExpired(token);
     }
+
 }

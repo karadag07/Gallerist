@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.karadag.galeri.controller.IController.IAccountController;
+import com.karadag.galeri.dto.OkResponse;
 import com.karadag.galeri.dto.RequestAccount;
 import com.karadag.galeri.dto.ResponseAccount;
 import com.karadag.galeri.service.IService.IAccountService;
@@ -19,7 +20,7 @@ public class AccountController implements IAccountController {
 
     @PostMapping("/account")
     @Override
-    public ResponseAccount saveAccount(@RequestBody @Valid RequestAccount account) {
-        return accountService.saveAccount(account);
+    public OkResponse<ResponseAccount> saveAccount(@RequestBody @Valid RequestAccount account) {
+        return OkResponse.ok(accountService.saveAccount(account));
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.karadag.galeri.controller.IController.IGalleristCarControllar;
+import com.karadag.galeri.dto.OkResponse;
 import com.karadag.galeri.dto.RequestGalleristCar;
 import com.karadag.galeri.dto.ResponseGalleristCar;
 import com.karadag.galeri.service.IService.IGalleristCarService;
@@ -19,7 +20,7 @@ public class GalleristCarController implements IGalleristCarControllar {
 
     @PostMapping("galleristCar")
     @Override
-    public ResponseGalleristCar saveGalleristCar(@RequestBody @Valid RequestGalleristCar galleristCar) {
-        return galleristCarService.saveGalleristCar(galleristCar);
+    public OkResponse<ResponseGalleristCar> saveGalleristCar(@RequestBody @Valid RequestGalleristCar galleristCar) {
+        return OkResponse.ok(galleristCarService.saveGalleristCar(galleristCar));
     }
 }

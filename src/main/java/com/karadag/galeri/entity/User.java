@@ -21,6 +21,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User extends BaseEntity implements UserDetails {
 
 	private String username;

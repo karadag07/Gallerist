@@ -36,13 +36,11 @@ public class RegisterServiceImpl implements IRegisterService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(RoleType.USER);
-
         userRepository.save(user);
 
-        String accessToken = accessTokenService.generateToken(user);
+        String accessToken = accessTokenService.generateAccessToken(user);
         String refreshToken = refreshTokenService.generateRefreshToken(user).getRefreshToken();
 
         return new ResponseToken(accessToken, refreshToken);
     }
-
 }

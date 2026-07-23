@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.karadag.galeri.controller.IController.ICustomerController;
+import com.karadag.galeri.dto.OkResponse;
 import com.karadag.galeri.dto.RequestCustomer;
 import com.karadag.galeri.dto.ResponseCustomer;
 import com.karadag.galeri.service.IService.ICustomerService;
@@ -20,7 +21,7 @@ public class CustomerController implements ICustomerController {
 
     @PostMapping("/customer")
     @Override
-    public ResponseCustomer saveCustomer(@RequestBody @Valid RequestCustomer customer) {
-        return customerService.saveCustomer(customer);
+    public OkResponse<ResponseCustomer> saveCustomer(@RequestBody @Valid RequestCustomer customer) {
+        return OkResponse.ok(customerService.saveCustomer(customer));
     }
 }

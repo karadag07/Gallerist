@@ -35,7 +35,7 @@ public class RefreshTokenServiceImpl implements IRefreshTokenService {
 
         User user = refreshToken.getUser();
 
-        String accessToken = accessTokenService.generateToken(user);
+        String accessToken = accessTokenService.generateAccessToken(user);
         String refreshTokenResponse = refreshToken.getRefreshToken();
 
         return new ResponseToken(accessToken, refreshTokenResponse);

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.karadag.galeri.controller.IController.IAddressController;
+import com.karadag.galeri.dto.OkResponse;
 import com.karadag.galeri.dto.RequestAddress;
 import com.karadag.galeri.dto.ResponseAddress;
 import com.karadag.galeri.service.IService.IAddressService;
@@ -19,7 +20,7 @@ public class AddressController implements IAddressController {
 
     @PostMapping("/address")
     @Override
-    public ResponseAddress saveAddress(@RequestBody @Valid RequestAddress address) {
-        return addressService.saveAddress(address);
+    public OkResponse<ResponseAddress> saveAddress(@RequestBody @Valid RequestAddress address) {
+        return OkResponse.ok(addressService.saveAddress(address));
     }
 }

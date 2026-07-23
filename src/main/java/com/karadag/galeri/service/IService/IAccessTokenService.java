@@ -14,7 +14,7 @@ import io.jsonwebtoken.Claims;
 public interface IAccessTokenService {
     SecretKey getKey();
 
-    String generateToken(User user);
+    String generateAccessToken(User user);
 
     <T> T exportToken(String token, Function<Claims, T> func);
 

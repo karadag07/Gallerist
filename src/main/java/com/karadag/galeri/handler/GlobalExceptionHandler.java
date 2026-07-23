@@ -23,15 +23,18 @@ public class GlobalExceptionHandler {
     // BaseException.
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<ErrorObject> handleBaseException(BaseException ex, WebRequest request) {
+
+        HttpStatus status = ex.getHttpStatus();
+
         // Client'a dönecek standart hata zarfını (ErrorObject) oluşturuyoruz.
         ErrorObject error = new ErrorObject(
-                HttpStatus.BAD_REQUEST.value(), // HTTP durum kodu: 400 (JSON body içindeki bilgi amaçlı)
+                status.value(), // HTTP durum kodu: 400 (JSON body içindeki bilgi amaçlı)
                 ex.getMessage(), // BaseException'ın taşıdığı hazır mesaj (ErrorMessage.prepareErrorMessage())
                 extractPath(request), // Hatanın hangi endpoint'te oluştuğu
                 new Date()); // Hatanın oluştuğu an
         // Gerçek HTTP cevabını 400 (Bad Request) durum koduyla, body'sinde ErrorObject
         // ile dönüyoruz.
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        return ResponseEntity.status(status).body(error);
     }
 
     // @Valid ile işaretli bir DTO'da (örn: @NotNull) validasyon hatası oluştuğunda

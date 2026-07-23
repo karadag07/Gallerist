@@ -42,7 +42,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
         ErrorObject error = new ErrorObject(
                 HttpStatus.UNAUTHORIZED.value(),
-                MessageType.USERNAME_OR_PASSWORD_INVALID.getMessage(),
+                messageType.getMessage(),
                 request.getServletPath(),
                 new Date());
 

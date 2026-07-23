@@ -29,6 +29,17 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
+        String authError = (String) request.getAttribute("authError");
+        MessageType messageType;
+
+        if ("TOKEN_EXPIRED".equals(authError)) {
+            messageType = MessageType.TOKEN_IS_EXPIRED;
+        } else if ("TOKEN_INVALID".equals(authError)) {
+            messageType = MessageType.TOKEN_IS_INVALID;
+        } else {
+            messageType = MessageType.AUTHENTICATION_REQUIRED; // token hiç yok / hiç gönderilmemiş
+        }
+
         ErrorObject error = new ErrorObject(
                 HttpStatus.UNAUTHORIZED.value(),
                 MessageType.USERNAME_OR_PASSWORD_INVALID.getMessage(),

@@ -12,6 +12,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.karadag.galeri.service.AccessTokenServiceImpl;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,20 +40,23 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         token = autHeader.substring(7);
-        username = accessTokenService.getUsername(token);
+        try {
+            username = accessTokenService.getUsername(token);
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails user = userDetailsService.loadUserByUsername(username);
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails user = userDetailsService.loadUserByUsername(username);
 
-            if (accessTokenService.isTokenValid(token, user)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        user,
-                        null, user.getAuthorities());
-
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+                if (accessTokenService.isTokenValid(token, user)) {
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                            user, null, user.getAuthorities());
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                }
             }
+        } catch (ExpiredJwtException ex) {
+            request.setAttribute("authError", "TOKEN_EXPIRED");
+        } catch (JwtException ex) {
+            request.setAttribute("authError", "TOKEN_INVALID");
         }
         filterChain.doFilter(request, response);
     }

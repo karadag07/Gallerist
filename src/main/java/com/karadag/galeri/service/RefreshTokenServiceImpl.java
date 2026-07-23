@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.karadag.galeri.dto.RequestRefreshToken;
 import com.karadag.galeri.dto.ResponseToken;
 import com.karadag.galeri.entity.RefreshToken;
 import com.karadag.galeri.entity.User;
@@ -22,7 +23,7 @@ public class RefreshTokenServiceImpl implements IRefreshTokenService {
     private final AccessTokenServiceImpl accessTokenService;
     private final RefreshTokenRepository refreshTokenRepository;
 
-    public ResponseToken generateAccessTokenFromRefreshToken(RefreshToken sendedRefreshToken) {
+    public ResponseToken generateAccessTokenFromRefreshToken(RequestRefreshToken sendedRefreshToken) {
         RefreshToken refreshToken = refreshTokenRepository.findByRefreshToken(sendedRefreshToken.getRefreshToken())
                 .orElseThrow(() -> new BaseException(
                         new ErrorMessage(MessageType.REFRESH_TOKEN_NOT_FOUND, "gonderilen refresh token bulunamadi")));

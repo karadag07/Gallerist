@@ -19,7 +19,7 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class AccessTokenServiceImpl implements IAccessTokenService {
 
-    private final static String SECRET_KEY = "6yAw9UJ1ZGIE3ivXxkQ1xnb9BauSkvcdSJ447DQE";
+    private final static String SECRET_KEY = "d0b1a8a8bf1e167861ab34e8374316bc102392a99078d8a0a52f87eaa5656f75";
 
     public SecretKey getKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);

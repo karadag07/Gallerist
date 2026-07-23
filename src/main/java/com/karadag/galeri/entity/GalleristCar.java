@@ -21,10 +21,10 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class GalleristCar extends BaseEntity {
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Gallerist gallerist;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Car car;
 
 }

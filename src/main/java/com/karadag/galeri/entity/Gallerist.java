@@ -23,7 +23,7 @@ public class Gallerist extends BaseEntity {
 
 	private String lastName;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Address address;
 
 }

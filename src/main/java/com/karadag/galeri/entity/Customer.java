@@ -29,10 +29,10 @@ public class Customer extends BaseEntity {
 
 	private Date birthOfDate;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Address address;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Account account;
 
 }

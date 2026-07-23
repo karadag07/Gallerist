@@ -7,12 +7,10 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.karadag.galeri.enums.MessageType;
-import com.karadag.galeri.exception.BaseException;
-import com.karadag.galeri.exception.ErrorMessage;
 import com.karadag.galeri.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -27,8 +25,7 @@ public class AppConfig {
     public UserDetailsService userDetailsService() {
         return username -> userRepository.findByUsername(username)
                 .orElseThrow(
-                        () -> new BaseException(
-                                new ErrorMessage(MessageType.USERNAME_NOT_FOUND, "kullanici bulunamadi")));
+                        () -> new UsernameNotFoundException("kullanici adi veya sifre hatali"));
     }
 
     @Bean

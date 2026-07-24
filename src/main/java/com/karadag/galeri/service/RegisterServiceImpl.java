@@ -35,7 +35,8 @@ public class RegisterServiceImpl implements IRegisterService {
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(RoleType.USER);
+        user.setRole(userRepository.count() == 0 ? RoleType.ADMIN : RoleType.USER);
+
         userRepository.save(user);
 
         String accessToken = accessTokenService.generateAccessToken(user);

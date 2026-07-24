@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.karadag.galeri.dto.CurrencyRatesResponse;
 import com.karadag.galeri.dto.RequestSaledCar;
@@ -32,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class SaledCarServiceImpl implements ISaledCarService {
 
         private final CustomerRepository customerRepository;

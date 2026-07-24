@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class GalleristCarController implements IGalleristCarControllar {
     private final IGalleristCarService galleristCarService;
 
-    @PostMapping("galleristCar")
+    @PostMapping("/galleristCar")
     @Override
     public OkResponse<ResponseGalleristCar> saveGalleristCar(@RequestBody @Valid RequestGalleristCar galleristCar) {
         return OkResponse.ok(galleristCarService.saveGalleristCar(galleristCar));

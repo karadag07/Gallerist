@@ -5,11 +5,11 @@ import java.util.function.Function;
 
 import javax.crypto.SecretKey;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.karadag.galeri.entity.User;
+import com.karadag.galeri.jwt.JwtProperties;
 import com.karadag.galeri.service.IService.IAccessTokenService;
 
 import io.jsonwebtoken.Claims;
@@ -22,11 +22,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccessTokenServiceImpl implements IAccessTokenService {
 
-    @Value("${jwt.secret}")
-    private String secretKey;
+    private final JwtProperties jwtProperties;
 
     public SecretKey getKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+        byte[] keyBytes = Decoders.BASE64.decode(jwtProperties.getSecret());
         return Keys.hmacShaKeyFor(keyBytes);
     }
 

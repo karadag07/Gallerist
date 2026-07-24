@@ -19,7 +19,7 @@ import com.karadag.galeri.enums.CarStatusType;
 import com.karadag.galeri.enums.CurrencyType;
 import com.karadag.galeri.enums.MessageType;
 import com.karadag.galeri.exception.BaseException;
-import com.karadag.galeri.exception.ErrorMessage;
+import com.karadag.galeri.exception.ErrorDetails;
 import com.karadag.galeri.mapper.SaledCarMapper;
 import com.karadag.galeri.repository.CarRepository;
 import com.karadag.galeri.repository.CustomerRepository;
@@ -45,26 +45,26 @@ public class SaledCarServiceImpl implements ISaledCarService {
         public ResponseSaledCar saveSaledCar(RequestSaledCar request) {
                 Gallerist gallerist = galleristRepository.findById(request.getGalleristId())
                                 .orElseThrow(() -> new BaseException(
-                                                new ErrorMessage(MessageType.NO_RECORD_EXIST, "gallerist")));
+                                                new ErrorDetails(MessageType.NO_RECORD_EXIST, "gallerist")));
 
                 Car car = carRepository.findById(request.getCarId())
                                 .orElseThrow(() -> new BaseException(
-                                                new ErrorMessage(MessageType.NO_RECORD_EXIST, "car")));
+                                                new ErrorDetails(MessageType.NO_RECORD_EXIST, "car")));
 
                 Customer customer = customerRepository.findById(request.getCustomerId())
                                 .orElseThrow(() -> new BaseException(
-                                                new ErrorMessage(MessageType.NO_RECORD_EXIST, "customer")));
+                                                new ErrorDetails(MessageType.NO_RECORD_EXIST, "customer")));
 
                 if (isSaledCar(car)) {// Araba satıldı mı kontrolu, satıldıysa exception fırlat
                         throw new BaseException(
-                                        new ErrorMessage(MessageType.CAR_STATUS_IS_ALREADY_SALED, "car is saled"));
+                                        new ErrorDetails(MessageType.CAR_STATUS_IS_ALREADY_SALED, "car is saled"));
                 }
 
                 BigDecimal carPrice = checkCurrency(car, customer.getAccount());
 
                 if (!isEnoughMoney(customer, carPrice)) {// Customerın parası yeterlı mı, yeterli değilse exception
                                                          // fırlat
-                        throw new BaseException(new ErrorMessage(MessageType.CUSTOMER_AMOUNT_IS_NOT_ENOUGH,
+                        throw new BaseException(new ErrorDetails(MessageType.CUSTOMER_AMOUNT_IS_NOT_ENOUGH,
                                         "money is not enough"));
                 }
 

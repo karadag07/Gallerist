@@ -11,7 +11,7 @@ import com.karadag.galeri.entity.RefreshToken;
 import com.karadag.galeri.entity.User;
 import com.karadag.galeri.enums.MessageType;
 import com.karadag.galeri.exception.BaseException;
-import com.karadag.galeri.exception.ErrorMessage;
+import com.karadag.galeri.exception.ErrorDetails;
 import com.karadag.galeri.repository.RefreshTokenRepository;
 import com.karadag.galeri.service.IService.IRefreshTokenService;
 
@@ -26,12 +26,12 @@ public class RefreshTokenServiceImpl implements IRefreshTokenService {
     public ResponseToken generateAccessTokenFromRefreshToken(RequestRefreshToken sendedRefreshToken) {
         RefreshToken refreshToken = refreshTokenRepository.findByRefreshToken(sendedRefreshToken.getRefreshToken())
                 .orElseThrow(() -> new BaseException(
-                        new ErrorMessage(MessageType.REFRESH_TOKEN_NOT_FOUND, "gonderilen refresh token bulunamadi")));
+                        new ErrorDetails(MessageType.REFRESH_TOKEN_NOT_FOUND, "gonderilen refresh token bulunamadi")));
 
         if (isRefreshTokenExpired(refreshToken)) {
             refreshTokenRepository.delete(refreshToken);
             throw new BaseException(
-                    new ErrorMessage(MessageType.REFRESH_TOKEN_IS_EXPIRED, "refrest tokenin suresi dolmustur"));
+                    new ErrorDetails(MessageType.REFRESH_TOKEN_IS_EXPIRED, "refrest tokenin suresi dolmustur"));
         }
 
         User user = refreshToken.getUser();

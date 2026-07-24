@@ -12,7 +12,7 @@ import com.karadag.galeri.dto.ResponseToken;
 import com.karadag.galeri.entity.User;
 import com.karadag.galeri.enums.MessageType;
 import com.karadag.galeri.exception.BaseException;
-import com.karadag.galeri.exception.ErrorMessage;
+import com.karadag.galeri.exception.ErrorDetails;
 import com.karadag.galeri.service.IService.IAccessTokenService;
 import com.karadag.galeri.service.IService.ILoginService;
 import com.karadag.galeri.service.IService.IRefreshTokenService;
@@ -41,7 +41,7 @@ public class LoginServiceImpl implements ILoginService {
             return new ResponseToken(accessToken, refreshToken);
         } catch (BadCredentialsException | UsernameNotFoundException ex) {
             throw new BaseException(
-                    new ErrorMessage(MessageType.USERNAME_OR_PASSWORD_INVALID, "kullanıcı adı veya şifre hatalı"));
+                    new ErrorDetails(MessageType.USERNAME_OR_PASSWORD_INVALID, "kullanıcı adı veya şifre hatalı"));
         }
     }
 

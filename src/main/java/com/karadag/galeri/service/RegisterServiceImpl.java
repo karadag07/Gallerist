@@ -9,7 +9,7 @@ import com.karadag.galeri.entity.User;
 import com.karadag.galeri.enums.MessageType;
 import com.karadag.galeri.enums.RoleType;
 import com.karadag.galeri.exception.BaseException;
-import com.karadag.galeri.exception.ErrorMessage;
+import com.karadag.galeri.exception.ErrorDetails;
 import com.karadag.galeri.repository.UserRepository;
 import com.karadag.galeri.service.IService.IAccessTokenService;
 import com.karadag.galeri.service.IService.IRefreshTokenService;
@@ -28,7 +28,7 @@ public class RegisterServiceImpl implements IRegisterService {
     @Override
     public ResponseToken register(RequestRegister request) {
         if (userRepository.findByUsername(request.getUsername()).isPresent()) {
-            throw new BaseException(new ErrorMessage(MessageType.USERNAME_ALREADY_EXISTS, "Username kullaniliyor"));
+            throw new BaseException(new ErrorDetails(MessageType.USERNAME_ALREADY_EXISTS, "Username kullaniliyor"));
         }
 
         User user = new User();

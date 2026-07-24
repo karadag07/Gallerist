@@ -9,7 +9,7 @@ import com.karadag.galeri.entity.Gallerist;
 import com.karadag.galeri.entity.GalleristCar;
 import com.karadag.galeri.enums.MessageType;
 import com.karadag.galeri.exception.BaseException;
-import com.karadag.galeri.exception.ErrorMessage;
+import com.karadag.galeri.exception.ErrorDetails;
 import com.karadag.galeri.mapper.GalleristCarMapper;
 import com.karadag.galeri.repository.CarRepository;
 import com.karadag.galeri.repository.GalleristCarRepository;
@@ -33,11 +33,11 @@ public class GalleristCarServiceImpl implements IGalleristCarService {
                                                                                    // baglayacagız
                 Gallerist gallerist = galleristRepository.findById(request.getGalleristId())
                                 .orElseThrow(() -> new BaseException(
-                                                new ErrorMessage(MessageType.NO_RECORD_EXIST, "gallerist")));
+                                                new ErrorDetails(MessageType.NO_RECORD_EXIST, "gallerist")));
 
                 Car car = carRepository.findById(request.getCarId())
                                 .orElseThrow(() -> new BaseException(
-                                                new ErrorMessage(MessageType.NO_RECORD_EXIST, "car")));
+                                                new ErrorDetails(MessageType.NO_RECORD_EXIST, "car")));
 
                 GalleristCar galleristCar = galleristCarMapper.toEntity(gallerist, car);
 

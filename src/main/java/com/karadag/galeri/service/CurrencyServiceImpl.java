@@ -6,7 +6,7 @@ import org.springframework.web.client.RestClient;
 import com.karadag.galeri.dto.CurrencyRatesResponse;
 import com.karadag.galeri.enums.MessageType;
 import com.karadag.galeri.exception.BaseException;
-import com.karadag.galeri.exception.ErrorMessage;
+import com.karadag.galeri.exception.ErrorDetails;
 import com.karadag.galeri.service.IService.ICurrencyRatesService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,13 +32,13 @@ public class CurrencyServiceImpl implements ICurrencyRatesService {
 
             if (response == null || response.getItems() == null || response.getItems().isEmpty()) {
                 throw new BaseException(
-                        new ErrorMessage(MessageType.CURRENY_RATES_IS_OCCURED, "kur bilgisi alinamadi"));
+                        new ErrorDetails(MessageType.CURRENY_RATES_IS_OCCURED, "kur bilgisi alinamadi"));
 
             }
             return response;
         } catch (Exception ex) {
             throw new BaseException(
-                    new ErrorMessage(MessageType.CURRENY_RATES_IS_OCCURED, "karsi sunucuda sorun cikti"));
+                    new ErrorDetails(MessageType.CURRENY_RATES_IS_OCCURED, "karsi sunucuda sorun cikti"));
         }
     }
 
